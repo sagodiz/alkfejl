@@ -20,3 +20,23 @@ Amit pluszban átnézünk az a JSTL.
  - admin esetében egy form az adatoknak
  - nem admin esetében csak legyen kiírva
  
+ ## Help
+ JSTL
+<%
+// valamikor valahol valahogy beállíthatunk attribútumokat.
+// ez lehetne <c:set> is, de most nem fontos.
+    UserSQLite dao = new UserSQLite();
+    request.setAttribute("attribName", dao.findAll());
+%>
+<!-- Ez egy példa, hogyan kell végigjárni elemeken-->
+<c:forEach var="varName" items="${requestScope.attribName}">
+
+  <a href="${pageContext.request.contextPath}/someURI?someParameter=${varName.property}>StgText</a>
+
+  <!-- Ez egy példa, hogyan kell feltételt használni-->
+  <c:if test="${varName.isStg() || varName.booleanStuff}">
+  
+     Stuff
+  </c:if>
+</c:forEach>
+
